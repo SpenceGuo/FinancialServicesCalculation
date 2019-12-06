@@ -1,7 +1,7 @@
 <?php
 class dbconfig
 {
-	public static $host = '202.120.36.29';
+	public static $host = '10.10.11.2';
 	public static $port = '23306';
 	public static $username = 'qi';
 	public static $password = 'password';
