@@ -60,7 +60,10 @@
 				},
 			    backgroundColor: '#21202D',
 			    legend: {
-			        data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
+			        data: <?php
+			        require('arrayTest.php');
+			        echo $arr;
+			        ?>,
 			        inactiveColor: '#777',
 			        textStyle: {
 			            color: '#fff'
