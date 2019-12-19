@@ -1,29 +1,33 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$dbname = "financial";
-//$dbname = "SH_Stock_Exchange";
- //echo "securityid: " . $row["securityid"]. " - datetime: " . $row["datetime"]. "<br>";
- // 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
-} 
+$servername = "10.10.11.2";
+$username = "qi";
+$password = "password";
+$dbname = 'SH_Stock_Exchange';
  
-//$sql = "SELECT securityid,datetime FROM his_cff WHERE securityid=\'IC0001\' AND datetime>20190918 ORDER BY datetime DESC";
-$sql = "SELECT * FROM data";
-$result = $conn->query($sql);
+// 创建连接
+//$conn = new mysqli($servername, $username, $password,$dbname);
+//$sql = "SELECT datetime,openpx,lastpx,lowpx,highpx FROM his_cff WHERE securityid=\'IC0001\' ORDER BY datetime ASC";
+//$result = $conn->query($sql);
+//if ($result->num_rows == 0)
+//{
+//	echo 'true';
+//}
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT datetime,openpx,lastpx FROM his_cff WHERE securityid=\'IC0001\' ORDER BY datetime ASC"); 
+    $stmt->execute();
  
-if ($result->num_rows > 0) {
-    // 输出数据
-    while($row = $result->fetch_assoc()) {
-        echo "securityid: " . $row["datetime"]. " - datetime: " . $row["value"]. "<br>";
+    // 设置结果集为关联数组
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
+        echo $v;
     }
-} else {
-    echo "0 结果";
 }
-$conn->close();
- 
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$conn = null;
+
 ?>
