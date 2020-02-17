@@ -39,7 +39,7 @@
 		
 		<div id="IM_Recomend" style="width: 50%;height: 600px;float: right;margin: 0;text-align: center;">
 			<div id="Max_Min">
-				<img height="250" width="300" src="images/source_cat02.jpg" />
+				<img height="250" width="300" src="C:/Users/TangGuo/Desktop/source_cat02.jpg" />
 			</div>
 			<div id="Recomend">
 				<dl style="text-align: center;color: #FFFFFF;">
@@ -50,6 +50,35 @@
 				</dl>
 			</div>
 		</div>
+		
+		<div id="SellDate" style="width: 50%;height: 600px;margin: 0;"></div>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('SellDate'));
+            option = {
+			    xAxis: {},
+			    yAxis: {},
+			    series: [{
+			        symbolSize: 20,
+			        data: [
+			            [10.0, 8.04],
+			            [8.0, 6.95],
+			            [13.0, 7.58],
+			            [9.0, 8.81],
+			            [11.0, 8.33],
+			            [14.0, 9.96],
+			            [6.0, 7.24],
+			            [4.0, 4.26],
+			            [12.0, 10.84],
+			            [7.0, 4.82],
+			            [5.0, 5.68]
+			        ],
+			        type: 'scatter'
+			    }]
+			};
+			myChart.setOption(option);
+        </script>
+		
 		
 		<script type="text/javascript">
 			// 基于准备好的dom，初始化echarts实例
